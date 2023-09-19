@@ -1,4 +1,4 @@
-FROM python:3.10-slim
+FROM python:3.11.5-slim
 
 WORKDIR /app
 
@@ -7,7 +7,7 @@ ENV POETRY_VERSION=1.2.0
 RUN pip install "poetry==$POETRY_VERSION"
 
 # copy application
-COPY ["pyproject.toml", "poetry.lock", "README.md", "./"]
+COPY ["pyproject.toml", "poetry.lock", "README.md", ".env", "./"]
 COPY ["src/", "src/"]
 
 # build wheel

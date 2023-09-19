@@ -24,12 +24,10 @@ def get_collection_category(request: Request) -> Collection:
 
 
 
-
 def read_categories(request: Request):
     collection = get_collection_category(request)
     all_items = collection.find()
     return list_serial(all_items)
-
 
 
 
