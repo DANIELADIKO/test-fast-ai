@@ -1,12 +1,12 @@
+from fastapi import FastAPI
 from router import ImageRouter, ClassificationRouter
 from pymongo import MongoClient
 from dotenv import load_dotenv
-from fastapi import FastAPI
 import uvicorn
 import os 
 
 
-load_dotenv('.env')
+load_dotenv('../../.env')
 
 
 destination_folder = os.environ.get('DESTINATION_FOLDER')
@@ -18,6 +18,7 @@ app: FastAPI = FastAPI()
 
 @app.on_event("startup")
 def startup_db_client():
+    print(f"DB URL : {db_url} / {db_name}")
     app.mongodb_client = MongoClient(db_url)
     app.database = app.mongodb_client[db_name]
     try : 

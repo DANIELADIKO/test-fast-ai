@@ -20,6 +20,7 @@ RUN pip install dist/*.whl
 # expose port
 EXPOSE 9000
 
+WORKDIR /app/src/example_app
 
 # command to run
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "9000", "--workers", "1"]
