@@ -2,7 +2,6 @@ from fastai.vision.all import *
 import os
 from fastapi import Body, HTTPException, Request
 from model.CategoryEntity import CategoryEntity
-from bson import ObjectId
 from pymongo.collection import Collection
 from typing import List
 from schema.CategorySchema import individual_serial, list_serial
@@ -11,7 +10,6 @@ from schema.CategorySchema import individual_serial, list_serial
 destination_folder = os.environ.get('DESTINATION_FOLDER')
 model_folder = os.environ.get('MODEL_FOLDER')
 learnModel: Learner = null
-
 
 def get_assets_path() -> Path : 
     if not os.path.exists(destination_folder):
@@ -71,6 +69,10 @@ def create_categories(request: Request, word_list : List[str]):
 
 
 
+def items_labels(filename):    
+    return filename[:filename.rfind('_')]  
+
+
 
 def train_model(request: Request): 
     print("start train model method ...")
@@ -100,7 +102,3 @@ def train_model(request: Request):
     # Save model into file
     model_path = get_model_path()+"/mymodel.pkl"
     learnModel.export(model_path)
-
-
-def items_labels(filename):    
-    return filename[:filename.rfind('_')]  

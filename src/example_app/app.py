@@ -6,7 +6,7 @@ import uvicorn
 import os 
 
 
-load_dotenv('../../.env')
+load_dotenv('.env')
 
 
 destination_folder = os.environ.get('DESTINATION_FOLDER')
