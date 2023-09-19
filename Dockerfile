@@ -23,4 +23,4 @@ EXPOSE 9000
 WORKDIR /app/src/example_app
 
 # command to run
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "9000", "--workers", "1"]
+CMD ["uvicorn", "main:app", "--root-path", "/blue-track", "--host", "0.0.0.0", "--port", "9000", "--workers", "1"]
