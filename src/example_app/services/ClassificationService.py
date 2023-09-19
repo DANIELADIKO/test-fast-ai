@@ -9,6 +9,7 @@ from schema.CategorySchema import individual_serial, list_serial
 
 
 destination_folder = os.environ.get('DESTINATION_FOLDER')
+model_folder = os.environ.get('MODEL_FOLDER')
 learnModel: Learner = null
 
 
@@ -16,6 +17,12 @@ def get_assets_path() -> Path :
     if not os.path.exists(destination_folder):
         os.makedirs(destination_folder)
     return Path(destination_folder)
+
+
+def get_model_path() -> Path : 
+    if not os.path.exists(model_folder):
+        os.makedirs(model_folder)
+    return Path(model_folder)
 
 
 
@@ -43,10 +50,9 @@ def create_categories(request: Request, word_list : List[str]):
     
     for word in word_list:
         if word not in existing_categories:
-            created_at = datetime.now()
             new_category = CategoryEntity(
                 name=word,
-                createdAt=created_at,
+                createdAt=datetime.now(),
             )
             new_categories.append(new_category)
     
@@ -90,6 +96,10 @@ def train_model(request: Request):
     print("Start Refine Model -----")
     learnModel.fine_tune(1)
 
+
+    # Save model into file
+    model_path = get_model_path()+"/mymodel.pkl"
+    learnModel.export(model_path)
 
 
 def items_labels(filename):    

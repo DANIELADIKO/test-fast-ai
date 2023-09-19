@@ -1,0 +1,14 @@
+docker run -p  9900:9000 --name test-ai \
+  --env DESTINATION_FOLDER=/var/www/files \
+  --env MODEL_FOLDER=/var/www/models \
+  --env DB_URL=mongodb://db:27017 \
+  --network pansement_pansement_network \
+   -v /var/www/html/ai-images:/var/www/files -v /var/www/html/ai-images:/var/www/models \
+   test-ai-classification:v1
+
+
+
+docker run  test-ai-classification:v1   bash
+
+
+uvicorn main:app --host 0.0.0.0 --port 9000 --workers 1

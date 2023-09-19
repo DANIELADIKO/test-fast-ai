@@ -22,7 +22,7 @@ def create(
 
 
 @router.get("/")
-def create(
+def list_all(
     request: Request) :
     print(f"read all data from the request ")
     return classificationService.read_categories(request)
@@ -30,7 +30,7 @@ def create(
 
 
 @router.post("/train-model")
-def create(
+def train_model(
     request: Request
 ):
     return classificationService.train_model(request)

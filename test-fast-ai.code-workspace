@@ -2,6 +2,10 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"name": "SSH FS - my_staging_vps",
+			"uri": "ssh://my_staging_vps/"
 		}
 	],
 	"settings": {
